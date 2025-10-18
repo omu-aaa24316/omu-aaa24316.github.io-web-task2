@@ -3,7 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>お薦めの食べ物</title>
+    <meta charset="UTF-8">
+    <title>動く時計</title>
+    <script>
+        function updateClock() {
+            // 現在時刻を取得
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+            
+            // 1桁の場合は0を付ける
+            if (hours < 10) hours = '0' + hours;
+            if (minutes < 10) minutes = '0' + minutes;
+            if (seconds < 10) seconds = '0' + seconds;
+            
+            // 時刻を表示
+            var timeString = hours + ':' + minutes + ':' + seconds;
+            document.getElementById('clock').innerHTML = timeString;
+        }
+        
+        // 1秒ごとにupdateClock関数を実行
+        setInterval(updateClock, 1000);
+        
+        // ページ読み込み時に即座に表示
+        window.onload = updateClock;
+    </script>
+
+
+    <h1>現在時刻</h1>
+    <div id="clock" style="font-size: 64px; font-weight: bold; color: black;">
+        00:00:00
+    </div>
+    
+    
 </head>
 <body>
     <div style="text-align: center;"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKuIPbto8bVcIHklYnX5sIvdpBbGCf40BWV8yjVQEASZgxZqMqlb7yQJ81Mj2PdhugaKZ28AiBi9yzx3aAAybHAtwzqCJiIEG8zJaCwjbq6OMcXb-r7eMts00Syi5ZlfY9o2F3KkdIBylp/s450/food_omoide.png" alt="お薦めの食べ物" width="200"></div>
