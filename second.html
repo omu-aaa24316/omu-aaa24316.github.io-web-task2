@@ -8,11 +8,47 @@
 </head>
     <body>
     <h2>BMI指標計算</h2>
-<form oninput="bmi.value = Math.round(Number(weight.value) / Math.pow(Number(height.value)/100, 2) * 10) / 10">
-    <p><label>体重(kg)：<input name="weight" type="number" step="any"></label></p>
-    <p><label>身長(cm)：<input name="height" type="number" step="any"></label></p>
-    <p><label>BMI：<output name="bmi"></output></label></p>
-</form>
+<form>
+    <p><label>体重(kg)：<input id="weight" type="number" step="any"></label></p>
+    <p><label>身長(cm)：<input id="height" type="number" step="any"></label></p>
+    <p>
+      <label>BMI：
+        <span id="bmi">--</span>
+        （<span id="judge">--</span>）
+      </label>
+    </p>
+  </form>
+
+  <script>
+    // 入力フォームの値が変化したら毎回BMIを再計算
+    document.querySelectorAll('#weight, #height').forEach(el => {
+      el.addEventListener('input', () => {
+        const w = parseFloat(document.getElementById('weight').value);
+        const h = parseFloat(document.getElementById('height').value) / 100;
+        const bmiSpan = document.getElementById('bmi');
+        const judgeSpan = document.getElementById('judge');
+
+        if (w > 0 && h > 0) {
+          const bmi = w / (h * h);
+          bmiSpan.textContent = bmi.toFixed(1);
+
+          // BMI値による判定
+          let judge = '';
+          if (bmi < 18.5) {
+            judge = '低体重';
+          } else if (bmi < 25) {
+            judge = '標準';
+          } else {
+            judge = '肥満';
+          }
+          judgeSpan.textContent = judge;
+        } else {
+          bmiSpan.textContent = '--';
+          judgeSpan.textContent = '--';
+        }
+      });
+    });
+  </script>
     <header>
         <h1>Webシステム構築基礎 第2回課題</h1>
         <p>氏名：前川誉晴（AAA24316）</p>
